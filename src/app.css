@@ -1,0 +1,122 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+html{
+  font-size: 14px;
+}
+
+.app{
+  background: url('./assets/winter.jpg');
+  background-size: cover;
+  background-position: bottom;
+}
+
+.app .warm{
+  background: url('./assets/summer.jpg')
+}
+
+main{
+  background: linear-gradient(rgba(0, 0, 0, .2),rgba(0, 0, 0, .75));
+  height: 100vh;
+  padding:0 22%;
+}
+
+.search{
+  margin: 0 0 75px;
+  display: flex;
+}
+
+.search__bar{
+  display: block;
+  width: 100%;
+  padding: 15px;
+  font-size: 1.5rem;;
+  border:none;
+  outline:none;
+  background: rgba(255, 255, 255, .5);
+  border-radius: 0 0 0 16px;
+  box-shadow: 0 5px rgba(0, 0, 0, .5);
+  transition: ease 0.1s;
+}
+
+.search__bar:focus{
+  background: rgba(255, 255, 255, .75);
+}
+
+.button{
+width: 10%;
+border-radius: 0 0 16px 0;
+box-shadow: 0 5px rgba(0, 0, 0, .5);
+display: inline-block;
+color:rgb(219, 210, 210);
+background-color: rgb(243, 112, 97);
+text-decoration: none;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 1.2rem;
+font-family: 'Varela Round', sans-serif;
+transition: ease 0.2s;
+}
+.button:active{
+  background-color: rgb(248, 75, 55);
+  color:white
+}
+.location{
+  color:white;
+  text-align: center;
+  font-family: 'Architects Daughter', cursive;
+}
+
+.location__place{
+  font-weight: 700;
+  font-size: 3rem;
+  text-shadow: 3px 3px rgba(50, 70, 50, .5);
+}
+
+.location__date{
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px rgba(50, 50, 70, .5);
+}
+
+.weather__temperature{
+  position: relative;
+  display: inline-block;
+  margin-top: 5%;
+  padding: 15px 25px;
+  background-color: rgba(255, 255, 255, .2);
+  text-shadow: 5px 5px rgba(50, 70, 50, .5);
+  box-shadow: 3px 6px rgba(0, 0, 0, .2);
+  font-family: 'Varela Round', sans-serif;
+  font-size: 7rem;
+  font-weight: 900;
+  border-radius: 16px;
+}
+
+.weather__type{
+  font-size: 5rem;
+  text-shadow: 3px 5px rgba(50, 50, 70, .5);
+}
+
+
+@media (max-width: 1500px){
+  .button{
+    width: 75px;
+  }
+}
+
+@media (max-width: 1100px){
+ main{
+   padding: 0 15%;
+ }
+}
+
+@media (max-width: 700px){
+  main{
+    padding: 0 10%;
+  }
+ }
