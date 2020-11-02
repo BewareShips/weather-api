@@ -1,67 +1,78 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./app.css";
 import Moment from "react-moment";
-import { sendQuery } from "./api/Api";
-
+import { sendQuery} from "./api/Api";
 
 function App() {
-  const [query, setQuery] = useState();
-  const [data, setData] = useState({});
-  const [prevData, setPrevData] = useState();
-  const [buttonClick, setbuttonClick] = useState(false);
+  const [queryTarget, setQueryTarget] = useState();
+  const [x, setX] = useState({});
 
-
-    const search = async (e) => {
-      if (e.key === "Enter" ) {
-        console.log("hiiiii")
+  const search = async (e) => {
+    if (queryTarget !== undefined) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const res = await sendQuery(queryTarget);
+        setX(res);
+        setQueryTarget("");
       }
-      // {
-      //   const res = await sendQuery(query);
-      //   setData(res);
-      //   setQuery(null)
-      //   console.log(data)
-      // }
-    };
-    
-    
-  // const search = async (e) => {
-  //   if (e.key === "Enter" || buttonClick === true) {
-  //     // if (query !== "" || query !==prevData) {
-  //     const res = await sendQuery(query);
-  //     setData(res);
-  //     // setbuttonClick(false);
-  //     // setPrevData(query);
-  //     // setQuery("");
+    }
+  };
 
-  //     // }else return
-  //   }
-  // };
+  const sendSubmit = async () => {
+    if (queryTarget !== undefined) {
+      const res = await sendQuery(queryTarget);
+      setX(res);
+      setQueryTarget("");
+    }
+  };
+
+  useEffect(() => {
+    sendQuery("Kerch").then((res) => setX(res));
+  }, []);
+
+  const iconImage = (value) =>{
+    const a =`http://openweathermap.org/img/wn/${value}@2x.png`
+    return <img src={a} className="image"/>
+  }
+  
+  const temp= (t) => Math.round(
+    t - 273.15
+  )
+
+ 
+
   return (
-    <div className="app">
+      <div className={typeof x.main !="undefined" && (temp(x.main.temp)> 20 ? "warm": (temp(x.main.temp) <0 ? "cold" : "app")) }>
       <main>
         <form className="search">
           <input
             type="text"
             className="search__bar"
             placeholder="Type please location..."
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
+            onChange={(e) => setQueryTarget(e.target.value)}
+            value={queryTarget}
             onKeyPress={search}
           />
-          <p  className="button">
+          <p className="button" onClick={sendSubmit}>
             Search
           </p>
         </form>
-        <div className="location">
-          <div className="location__place">Vorkuta</div>
-          <div className="location__date">
-            <Moment format=" dddd Do MMMM YYYY ">{new Date()}</Moment>
+        {typeof x.main != "undefined" ? (
+          <div className="location">
+            <div className="location__place">{x.name} {x.sys.country}</div>
+            <div className="location__date">
+              <Moment format=" dddd Do MMMM YYYY ">{new Date()}</Moment>
+            </div>
+            <div className="weather">
+              <div className="weather__temperature">{`${temp(
+                x.main.feels_like)+  " / " + temp(x.main.temp_max)}°C`}</div>
+              <div className="weather__type">{x.weather[0].description} {iconImage(x.weather[0].icon)}</div>
+              
+            </div>
           </div>
-          <div className="weather">
-            <div className="weather__temperature">15°C</div>
-            <div className="weather__type">Sunny</div>
-          </div>
-        </div>
+        ) : (
+          ""
+        )}
       </main>
     </div>
   );

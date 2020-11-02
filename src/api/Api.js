@@ -9,6 +9,6 @@ const api = {
 
 
 export const sendQuery = (city) => {
-   return Axios.get(`${api.url}weather?q=${city}&appid=${api.key}`).then(res=>res.data)
+   return Axios.get(`${api.url}weather?q=${city}&lang=ru&appid=${api.key}`).then(res=>res.data)
 };
 

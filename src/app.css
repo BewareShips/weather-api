@@ -8,30 +8,41 @@ html{
   font-size: 14px;
 }
 
-.app{
+.cold{
   background: url('./assets/winter.jpg');
   background-size: cover;
   background-position: bottom;
 }
 
-.app .warm{
-  background: url('./assets/summer.jpg')
+.warm{
+  background: url('./assets/summer.jpg');
+  background-size: cover;
+  background-position: bottom;
+
+}
+ .app{  
+  background:url('./assets/middle.jpg');
+  background-size: cover;
+  background-position: bottom;
 }
 
 main{
   background: linear-gradient(rgba(0, 0, 0, .2),rgba(0, 0, 0, .75));
   height: 100vh;
-  padding:0 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 .search{
   margin: 0 0 75px;
-  display: flex;
+  display: grid;
+  grid-template-columns:minmax(200px,12fr)  minmax(70px,1fr);
 }
 
 .search__bar{
   display: block;
-  width: 100%;
   padding: 15px;
   font-size: 1.5rem;;
   border:none;
@@ -47,7 +58,6 @@ main{
 }
 
 .button{
-width: 10%;
 border-radius: 0 0 16px 0;
 box-shadow: 0 5px rgba(0, 0, 0, .5);
 display: inline-block;
@@ -60,6 +70,7 @@ align-items: center;
 font-size: 1.2rem;
 font-family: 'Varela Round', sans-serif;
 transition: ease 0.2s;
+cursor: pointer;
 }
 .button:active{
   background-color: rgb(248, 75, 55);
@@ -98,25 +109,53 @@ transition: ease 0.2s;
 }
 
 .weather__type{
-  font-size: 5rem;
+  font-size: 4rem;
   text-shadow: 3px 5px rgba(50, 50, 70, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2%;
+}
+
+.image{
+  width: 125px;
+  height: 125px;
+  margin-top: -20px;
 }
 
 
-@media (max-width: 1500px){
-  .button{
-    width: 75px;
+
+ /* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+  .search{
+    padding: 0 60px;
+  }
+  .location__place{
+    font-size: 2rem;
+  }
+  .weather__temperature{
+    font-size: 6rem;
+  }
+  .weather__type{
+    font-size: 3rem;
   }
 }
 
-@media (max-width: 1100px){
- main{
-   padding: 0 15%;
- }
-}
-
-@media (max-width: 700px){
-  main{
-    padding: 0 10%;
+/* Landscape phones and smaller */
+@media (max-width: 480px) {
+  .search{
+    padding: 0;
   }
- }
+  .location__place{
+    font-size: 1.5rem;
+  }
+  .location__date{
+    font-size: 1rem;
+  }
+  .weather__temperature{
+    font-size: 4rem;
+  }
+  .weather__type{
+    font-size: 2rem;
+  }
+}
