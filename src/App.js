@@ -39,7 +39,7 @@ function App() {
     t - 273.15
   )
 
- 
+ const handleChange = (e) => setQueryTarget(e.target.value)
 
   return (
       <div className={typeof x.main !="undefined" && (temp(x.main.temp)> 20 ? "warm": (temp(x.main.temp) <0 ? "cold" : "app")) }>
@@ -49,7 +49,7 @@ function App() {
             type="text"
             className="search__bar"
             placeholder="Type please location..."
-            onChange={(e) => setQueryTarget(e.target.value)}
+            onChange={handleChange}
             value={queryTarget}
             onKeyPress={search}
           />
